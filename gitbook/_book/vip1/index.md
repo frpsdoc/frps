@@ -9,6 +9,6 @@
   <br/>连接地址为：119.23.255.193:7000状态查询：[http://119.23.255.193:7500](http://119.23.255.193:7500/)查询帐号和密码为：admin   安全因素不提供
   <br/>默认http端口为80
   <br/>默认https端口为443端口开放:所有
-  <br/>token(免费获取)：付费5元进入，【vip付费通道】: (https://frps.wlphp.com/doc/pay.html)
+  <br/>token(获取)：付费5元进入，【vip付费通道】: (https://frps.wlphp.com/doc/pay.html)
   <br/>点击链接加入群聊【frps初级vip群】：[<font color='red'>先点击上面连接付费在申请入群</font>](https://jq.qq.com/?_wv=1027&k=m4CKC1ul)
   <br/>域名解析:不提供免费域名
