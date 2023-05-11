@@ -29,13 +29,13 @@ local_ip = 192.168.31.55
 local_port = 8080
 use_compression = true
 use_encryption = true
-custom_domains = 2.frpvip.wlphp.com
+custom_domains =  把自己的域名解析到server_addr这个ip地址
 
 
 
 [https_wl1] 
 type = https
-custom_domains = 11.frpvip.wlphp.com
+custom_domains =  把自己的域名解析到server_addr这个ip地址
 plugin = https2http
 plugin_local_addr = 127.0.0.1:80
 
