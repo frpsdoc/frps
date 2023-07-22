@@ -7,6 +7,6 @@ vip版本就是合租同一个服务端的模式，服务器由我提供并且�
 <br/>查询帐号和密码为：admin    安全因素不提供
 <br/>默认http端口为80
 <br/>默认https端口为443端口开放:所有
-<br/>token(获取)：付费20元进入，【vip付费通道】: (https://frps.wlphp.com/doc/pay.html)
+<br/>token(获取)：付费进入，【vip付费通道】: (https://frps.wlphp.com/doc/pay.html)
 <br/>点击链接加入群聊【技术小分队9529】：(点击链接加入群聊【技术小分队9529】：https://jq.qq.com/?_wv=1027&k=fGzaIZ0V)
 <br/>域名解析:海外服务器免备案

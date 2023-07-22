@@ -34,7 +34,8 @@
     "title": "frps-doc",
     "variables": {},
 	"plugins": [
-        "hide-element"          
+        "hide-element",
+		"fontsettings"
     ],
     
     "pluginsConfig":{            
