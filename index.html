@@ -256,7 +256,14 @@
                 serverAddr = "193.123.85.124"
                 serverPort = 7000
                 auth.token = "群内公告获取&"
-                
+ 
+                [[proxies]]
+                name = "ssh"
+                type = "tcp"
+                localIP = "127.0.0.1"
+                localPort = 22
+                remotePort = 6000               
+
                 [[proxies]]
                 name = "test-http"
                 type = "http"
@@ -264,20 +271,18 @@
                 localPort = 8000
                 customDomains = ["1.134.wlphp.com"]
 				
-				
-[[proxies]]
-name = "test_https2http"
-type = "https"
-customDomains = ["test.example.com"]
-
-[proxies.plugin]
-type = "https2http"
-localAddr = "127.0.0.1:80"
-crtPath = "./server.crt"
-keyPath = "./server.key"
-hostHeaderRewrite = "127.0.0.1"
-requestHeaders.set.x-from-where = "frp"		
-				
+                [[proxies]]
+                name = "test_htts2http"
+                type = "https"
+                customDomains = ["2.134.wlphp.com"]
+                [proxies.plugin]
+                type = "https2http"
+                localAddr = "127.0.0.1:80"
+                # HTTPS 证书相关的配置
+                crtPath = "./server.crt"
+                keyPath = "./server.key"
+                hostHeaderRewrite = "127.0.0.1"
+                requestHeaders.set.x-from-where = "frp"
               </pre>
               </ul>
               <br>
