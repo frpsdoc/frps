@@ -263,6 +263,21 @@
                 localIP = "127.0.0.1"
                 localPort = 8000
                 customDomains = ["1.134.wlphp.com"]
+				
+				
+[[proxies]]
+name = "test_https2http"
+type = "https"
+customDomains = ["test.example.com"]
+
+[proxies.plugin]
+type = "https2http"
+localAddr = "127.0.0.1:80"
+crtPath = "./server.crt"
+keyPath = "./server.key"
+hostHeaderRewrite = "127.0.0.1"
+requestHeaders.set.x-from-where = "frp"		
+				
               </pre>
               </ul>
               <br>
