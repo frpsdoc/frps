@@ -48,9 +48,17 @@
               <span title="联系方式"> qq:613154514
               </span>
             </div>
-            <div class="layui-btn-container dev-themes-active"> <a href="https://github.com/fatedier/frp/releases"
-                class="layui-btn">frp官网下载</a> <a href="https://github.com/fatedier/frp" target="_blank"
-                class="layui-btn layui-btn-primary"> frp源码地址 </a> </div>
+            <div class="layui-btn-container dev-themes-active"> 
+			<a href="https://github.com/fatedier/frp/releases"
+                class="layui-btn">frp官网下载</a>
+				<a href="https://github.com/fatedier/frp" target="_blank"
+                class="layui-btn layui-btn-primary"> frp源码地址 </a> 
+							<a href="https://gofrp.org/" target="_blank"
+                class="layui-btn layui-btn-primary"> frp官方文档地址 </a> 
+					
+				
+				
+				</div>
           </div>
         </div>
       </div>
@@ -60,7 +68,7 @@
         <div class="layui-tab layui-tab-brief" lay-filter="DEV-themes-detail-tabs">
           <ul class="layui-tab-title">
             <li lay-id="" class="layui-this">介绍</li>
-            <li lay-id="changelog">客户端配置文件</li>
+            <li lay-id="changelog">服务端-客户端配置文件</li>
             <li lay-id=""> <a
                 href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=SBeJbYKUv4dqwpmAxhNrRp4942SNFz4e&authKey=R9ixupXuBsf31lZR8Kc9K4PQsHMtstysyHq5cCL92we8mdQWIGWSarJI4eP84GFD&noverify=0&group_code=791429525"
                 target="_blank"> 问题反馈 </a> </li>
@@ -199,7 +207,31 @@
 
             </div>
             <div class="layui-tab-item">
-              <h3>旧版-ini模式</h3>
+			
+			  <h3>旧版-ini模式（服务端）</h3>
+              <ul>
+                <pre class="layui-code code-demo" lay-options="{}">
+[common]
+bind_addr = 0.0.0.0
+bind_port = 7000
+bind_udp_port = 7001
+kcp_bind_port = 7000
+vhost_http_port = 80
+vhost_https_port = 443
+dashboard_addr = 0.0.0.0
+dashboard_port = 7500
+dashboard_user = admin
+dashboard_pwd = admin
+token = 123456
+
+
+              </pre>
+              </ul>
+              <br>
+			
+			
+			
+              <h3>旧版-ini模式（客户端）</h3>
               <ul>
                 <pre class="layui-code code-demo" lay-options="{}">
                 [common]
@@ -250,7 +282,27 @@
               </pre>
               </ul>
               <br>
-              <h3>新版-toml模式</h3>
+			  
+			  
+			  <h3>新版-toml模式（服务端）</h3>
+              <ul>
+                <pre class="layui-code code-demo" lay-options="{}">
+					bindPort = 7000
+					vhostHTTPPort = 80
+					vhostHTTPSPort = 443
+					auth.token='123456'
+
+					webServer.addr = "0.0.0.0"
+					webServer.port = 7500
+					webServer.user = "admin"
+					webServer.password = "admin"
+              </pre>
+              </ul>
+              <br>
+						  
+			  
+			  
+              <h3>新版-toml模式（客户端）</h3>
               <ul>
                 <pre class="layui-code code-demo" lay-options="{}">
                 serverAddr = "193.123.85.124"
