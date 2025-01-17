@@ -1,0 +1,1 @@
+{"title": "frp管理器（非官方）", "name": "wlfrp", "ps": "改自于官方版本，修复若干bug！", "versions": "v1.0.1", "checks": ["/www/server/panel/plugin/wlfrp"], "author": "马农在跑步", "home": "https://frps.wlphp.com/", "date": "2024-12-30"}
