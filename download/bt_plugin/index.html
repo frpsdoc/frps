@@ -105,8 +105,8 @@
               </p>\
               <div>'+_html+'</div>'+ (rdata['server_addr'] ? '<div class="mt20">服务器访问地址:<a class="btlink ml10" target="_blank" href="'+ rdata.server_addr +'">'+ rdata.server_addr +'</a></div>' : '') +'\
           </div>')
-          $('#webEdit-con .tab-con .tab-block.on').append('<div class="mt20">win ARM客户端下载包:<a class="btlink ml10" target="_blank" href="http://download.bt.cn/src/frp/frp_0.52.3_darwin_arm64.tar.gz">http://download.bt.cn/src/frp/frp_0.52.3_darwin_arm64.tar.gz</a></div>\
-          <div class="mt20">win AMD客户端下载包:<a class="btlink ml10" target="_blank" href="http://download.bt.cn/src/frp/frp_0.52.3_darwin_amd64.tar.gz">http://download.bt.cn/src/frp/frp_0.52.3_darwin_amd64.tar.gz</a></div>\
+          $('#webEdit-con .tab-con .tab-block.on').append('<div class="mt20">win ARM客户端下载包:<a class="btlink ml10" target="_blank" href="https://frps.wlphp.com/download/src/frp/frp_0.52.3_darwin_arm64.tar.gz">https://frps.wlphp.com/download/src/frp/frp_0.52.3_darwin_arm64.tar.gz</a></div>\
+          <div class="mt20">win AMD客户端下载包:<a class="btlink ml10" target="_blank" href="https://frps.wlphp.com/download/src/frp/frp_0.52.3_darwin_amd64.tar.gz">https://frps.wlphp.com/download/src/frp/frp_0.52.3_darwin_amd64.tar.gz</a></div>\
           <div class="mt20 '+ (rdata.ps ? '' : 'hide') +'">'+ rdata.ps +' 【<a href="javascript:;" class="btlink re_install_frp">点击重新安装'+ (i ? 'frpc' : 'frps') +'</a>】</div>')
 
           $('.re_install_frp').unbind('click').click(function () {

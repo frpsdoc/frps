@@ -83,17 +83,17 @@ class wlfrp_main:
     def install_frps(self, get=None):
         if os.path.exists('/etc/init.d/frps') and os.path.exists('/usr/local/frps/frps'):
             return public.returnMsg(False, 'FRPS已经安装了!')
-        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz http://download.bt.cn/src/frp/frp_0.53.2_linux_amd64.tar.gz')
+        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz https://frps.wlphp.com/download/src/frp/frp_0.53.2_linux_amd64.tar.gz')
         public.ExecShell('tar -zxvf /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz -C /usr/local/')
         public.ExecShell('mv /usr/local/frp_0.53.2_linux_amd64 /usr/local/frps')
         public.ExecShell('rm -f /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz')
-        public.ExecShell('wget -O /etc/init.d/frps https://download.bt.cn/src/frp/frps.init')
+        public.ExecShell('wget -O /etc/init.d/frps https://frps.wlphp.com/download/src/frp/frps.init')
         public.ExecShell('cp /etc/init.d/frps /usr/bin/frps')
         public.ExecShell('chmod +x /etc/init.d/frps')
-        set_bind_port = 15443
-        set_vhost_http_port = 18080
-        set_vhost_https_port = 18443
-        set_dashboard_port = 16443
+        set_bind_port = 7000
+        set_vhost_http_port = 8080
+        set_vhost_https_port = 8443
+        set_dashboard_port = 7500
         set_dashboard_user = public.GetRandomString(8)
         set_dashboard_pwd = public.GetRandomString(16)
         set_token = public.GetRandomString(16)
@@ -107,7 +107,7 @@ class wlfrp_main:
 bindPort = {set_bind_port}
 kcpBindPort = {set_bind_port}
 webServer.addr = "0.0.0.0"
-webServer.port = 7001
+webServer.port = "{set_dashboard_port}"
 webServer.user = "{set_dashboard_user}"
 webServer.password = "{set_dashboard_pwd}"
 dashboardPwd = "{set_dashboard_pwd}"
@@ -228,25 +228,41 @@ tcpmuxHTTPConnectPort  = {set_tcp_mux}
         if 'Error' in os_bit:
             return public.returnMsg(False, '暂不支持该系统!')
         name = 'frp_0.52.3_linux_{}'.format(os_bit)
-        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/{}.tar.gz http://download.bt.cn/src/frp/{}.tar.gz'.format(name, name))
+        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/{}.tar.gz https://frps.wlphp.com/download/src/frp/{}.tar.gz'.format(name, name))
         public.ExecShell('tar -zxvf /www/server/panel/plugin/wlfrp/{}.tar.gz -C /usr/local/'.format(name))
         public.ExecShell('mv /usr/local/{} /usr/local/frpc'.format(name))
         public.ExecShell('rm -f /www/server/panel/plugin/wlfrp/{}.tar.gz'.format(name))
-        public.ExecShell('wget -O  /etc/init.d/frpc https://download.bt.cn/src/frp/frpc.init')
+        public.ExecShell('wget -O  /etc/init.d/frpc https://frps.wlphp.com/download/src/frp/frpc.init')
         public.ExecShell('chmod +x /etc/init.d/frpc')
-        public.ExecShell('cp /etc/init.d/frpc /usr/bin/frpc')
+        public.ExecShell('cp /etc/init.d/frpc  /usr/bin/frpc')
         data = """
-serverAddr = "*.*.*.*"
-serverPort = ***
-auth.token = "*****"
-transport.tcpMax = true
-
-[ssh]
-name = "*****"
+serverAddr = "193.123.85.124"
+serverPort = 7000
+auth.token = "查看:frps.wlphp.com"
+[[proxies]]
+name = "ssh"
 type = "tcp"
-local_ip = "127.0.0.1"
-local_port = 22
-remote_port = 22
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 6000               
+[[proxies]]
+name = "test-http"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 8000
+customDomains = ["1.134.wlphp.com"]
+[[proxies]]
+name = "test_htts2http"
+type = "https"
+customDomains = ["2.134.wlphp.com"]
+[proxies.plugin]
+type = "https2http"
+localAddr = "127.0.0.1:80"
+# HTTPS 证书相关的配置
+crtPath = "./server.crt"
+keyPath = "./server.key"
+hostHeaderRewrite = "127.0.0.1"
+requestHeaders.set.x-from-where = "frp"
 """
         public.writeFile('/usr/local/frpc/frpc.toml', data)
         if 'CentOS' in public.get_os_version():
@@ -279,7 +295,7 @@ remote_port = 22
         status = status[0].find("is running") != -1
         data = {'status': status,
                 'install_status': 1 if os.path.exists('/usr/local/frpc/frpc') else 0,
-                'ps': "重新安装frps"
+                'ps': "重新安装frpc"
                 }
         return data
 
