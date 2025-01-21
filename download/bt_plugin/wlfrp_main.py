@@ -103,9 +103,10 @@ class wlfrp_main:
         str_log_file = "/var/log/frps.log"
         str_log_file_flag = "enable"
         set_tcp_mux = 16337
+        set_kcp_bind_port=15443
         data = """  
 bindPort = {set_bind_port}
-kcpBindPort = {set_bind_port}
+kcpBindPort = {set_kcp_bind_port}
 webServer.addr = "0.0.0.0"
 webServer.port = "{set_dashboard_port}"
 webServer.user = "{set_dashboard_user}"
@@ -223,7 +224,7 @@ tcpmuxHTTPConnectPort  = {set_tcp_mux}
 
     def install_frpc(self, get=None):
         if os.path.exists('/usr/local/frpc/frpc.toml') and os.path.exists('/etc/init.d/frpc') and os.path.exists('/usr/local/frpc/frpc'):
-            return public.returnMsg(False, 'FRPS已经安装了!')
+            return public.returnMsg(False, 'FRPC已经安装了!')
         os_bit = self.check_os_bit()
         if 'Error' in os_bit:
             return public.returnMsg(False, '暂不支持该系统!')
