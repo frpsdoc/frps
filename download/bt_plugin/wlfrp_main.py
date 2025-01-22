@@ -83,11 +83,11 @@ class wlfrp_main:
     def install_frps(self, get=None):
         if os.path.exists('/etc/init.d/frps') and os.path.exists('/usr/local/frps/frps'):
             return public.returnMsg(False, 'FRPS已经安装了!')
-        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz https://frps.wlphp.com/download/src/frp/frp_0.53.2_linux_amd64.tar.gz')
+        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz  https://zs-fuliv2.oss-cn-beijing.aliyuncs.com/src/frp/frp_0.53.2_linux_amd64.tar.gz')
         public.ExecShell('tar -zxvf /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz -C /usr/local/')
         public.ExecShell('mv /usr/local/frp_0.53.2_linux_amd64 /usr/local/frps')
         public.ExecShell('rm -f /www/server/panel/plugin/wlfrp/frp_0.53.2_linux_amd64.tar.gz')
-        public.ExecShell('wget -O /etc/init.d/frps https://frps.wlphp.com/download/src/frp/frps.init')
+        public.ExecShell('wget -O /etc/init.d/frps  https://zs-fuliv2.oss-cn-beijing.aliyuncs.com/src/frp/frps.init')
         public.ExecShell('cp /etc/init.d/frps /usr/bin/frps')
         public.ExecShell('chmod +x /etc/init.d/frps')
         set_bind_port = 7000
@@ -114,13 +114,13 @@ webServer.password = "{set_dashboard_pwd}"
 dashboardPwd = "{set_dashboard_pwd}"
 vhostHTTPPort = {set_vhost_http_port}
 vhostHTTPSPort = {set_vhost_https_port}
-log.file = "{str_log_file}"
+log.to = "{str_log_file}"
 log.level = "{str_log_level}"
 log.maxDays = {set_log_max_days}
 auth.token = "{set_token}"
 maxPoolCount = {set_max_pool_count}
 tcpmuxHTTPConnectPort  = {set_tcp_mux}
-        """.format(set_bind_port=set_bind_port, set_vhost_http_port=set_vhost_http_port, set_vhost_https_port=set_vhost_https_port, set_dashboard_port=set_dashboard_port,
+        """.format(set_bind_port=set_bind_port,set_kcp_bind_port=set_kcp_bind_port,  set_vhost_http_port=set_vhost_http_port, set_vhost_https_port=set_vhost_https_port, set_dashboard_port=set_dashboard_port,
                    set_dashboard_user=set_dashboard_user, set_dashboard_pwd=set_dashboard_pwd, set_token=set_token, set_max_pool_count=set_max_pool_count, str_log_level=str_log_level,
                    set_log_max_days=set_log_max_days, str_log_file=str_log_file, str_log_file_flag=str_log_file_flag, set_tcp_mux=set_tcp_mux)
         public.writeFile('/usr/local/frps/frps.toml', data)
@@ -154,6 +154,8 @@ tcpmuxHTTPConnectPort  = {set_tcp_mux}
             return public.returnMsg(False, '修改失败!')
 
     def get_frps_info(self, get=None):
+        
+        
         status = public.ExecShell("/etc/init.d/frps status")
         status = status[0].find("is running") != -1
         config = self.get_frps_config()
@@ -229,17 +231,20 @@ tcpmuxHTTPConnectPort  = {set_tcp_mux}
         if 'Error' in os_bit:
             return public.returnMsg(False, '暂不支持该系统!')
         name = 'frp_0.52.3_linux_{}'.format(os_bit)
-        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/{}.tar.gz https://frps.wlphp.com/download/src/frp/{}.tar.gz'.format(name, name))
+        public.ExecShell('wget -O /www/server/panel/plugin/wlfrp/{}.tar.gz https://zs-fuliv2.oss-cn-beijing.aliyuncs.com/src/frp/{}.tar.gz'.format(name, name))
         public.ExecShell('tar -zxvf /www/server/panel/plugin/wlfrp/{}.tar.gz -C /usr/local/'.format(name))
         public.ExecShell('mv /usr/local/{} /usr/local/frpc'.format(name))
         public.ExecShell('rm -f /www/server/panel/plugin/wlfrp/{}.tar.gz'.format(name))
-        public.ExecShell('wget -O  /etc/init.d/frpc https://frps.wlphp.com/download/src/frp/frpc.init')
+        public.ExecShell('wget -O  /etc/init.d/frpc   https://zs-fuliv2.oss-cn-beijing.aliyuncs.com/src/frp/frpc.init')
         public.ExecShell('chmod +x /etc/init.d/frpc')
         public.ExecShell('cp /etc/init.d/frpc  /usr/bin/frpc')
         data = """
 serverAddr = "193.123.85.124"
 serverPort = 7000
 auth.token = "查看:frps.wlphp.com"
+log.to = "/var/log/frpc.log"
+log.level = "info"
+log.maxDays = 30
 [[proxies]]
 name = "ssh"
 type = "tcp"

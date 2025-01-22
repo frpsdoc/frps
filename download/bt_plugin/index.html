@@ -402,7 +402,7 @@
                   token: res.auth.token
                 })
                 formData.log = JSON.stringify({
-                  file: res.log.file,
+                  to: res.log.to,
                   level: res.log.level,
                   maxDays: res.log.maxDays
                 })
@@ -450,7 +450,7 @@
                   port: res.webServer.port
                 })
                 formData.log = JSON.stringify({
-                  file: res.log.file,
+                  to: res.log.to,
                   level: res.log.level,
                   maxDays: res.log.maxDays
                 })
@@ -479,12 +479,12 @@
                     group: [
                       {
                         type: 'text',
-                        name: 'file',
+                        name: 'to',
                         width: '300px',
                         icon: {
                           type: 'glyphicon-folder-open',
                           select: 'dir',
-                          defaultPath:$('[name=file]').val(),
+                          defaultPath:$('[name=to]').val(),
                           event: function (ev) {},
                         },
                       },
@@ -539,7 +539,7 @@
                   port: res.webServer.port
                 })
                 formData.log = JSON.stringify({
-                  file: form.file,
+                  to: form.to,
                   level: form.level,
                   maxDays: form.maxDays
                 })
@@ -586,7 +586,7 @@
               port: res.webServer.port
             })
             formData.log = JSON.stringify({
-              file: res.log.file,
+              to: res.log.to,
               level: res.log.level,
               maxDays: res.log.maxDays
             })
